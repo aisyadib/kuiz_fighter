@@ -27,14 +27,14 @@
     border:4px solid var(--line);
     box-shadow:0 0 40px #000;
   }
-  /* CRT scanlines */
   #game::after{
     content:''; position:absolute; inset:0; pointer-events:none; z-index:99;
     background:repeating-linear-gradient(0deg, rgba(0,0,0,.12) 0 2px, transparent 2px 4px);
   }
-  .screen{position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center; gap:24px; padding:24px; text-align:center;}
+  .screen{position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center; gap:22px; padding:24px; text-align:center;}
   .screen.active{display:flex;}
   h1{font-size:clamp(20px,4vw,34px); color:var(--gold); text-shadow:4px 4px 0 #7a1f1f, 8px 8px 0 #000; line-height:1.4;}
+  h2{font-size:clamp(13px,2.5vw,18px); color:var(--gold); text-shadow:3px 3px 0 #000;}
   .subtitle{font-size:10px; color:var(--blue); letter-spacing:2px;}
   .blink{animation:blink 1s steps(2) infinite;}
   @keyframes blink{50%{opacity:0;}}
@@ -46,7 +46,9 @@
   }
   .btn:hover{border-color:var(--gold); color:var(--gold); transform:translate(-1px,-1px);}
   .btn:active{transform:translate(2px,2px); box-shadow:1px 1px 0 #000;}
-  /* ---------- character select ---------- */
+  .btnGrid{display:flex; gap:14px; flex-wrap:wrap; justify-content:center; max-width:760px;}
+  .backBtn{position:absolute; top:14px; left:14px; font-size:9px; padding:10px 12px; z-index:10;}
+  .crumb{font-size:8px; color:#8fa3d9; letter-spacing:1px;}
   #charGrid{display:flex; gap:18px; flex-wrap:wrap; justify-content:center;}
   .charCard{
     width:130px; padding:12px 8px 10px; cursor:pointer;
@@ -55,16 +57,14 @@
   }
   .charCard img{height:96px; image-rendering:pixelated;}
   .charCard .cname{font-size:9px; color:var(--blue); text-transform:uppercase;}
-  .charCard:hover{border-color:var(--gold);} 
+  .charCard:hover{border-color:var(--gold);}
   .charCard:hover .cname{color:var(--gold);}
-  /* ---------- VS splash ---------- */
   #vsRow{display:flex; align-items:center; gap:40px;}
   #vsRow img{height:150px; image-rendering:pixelated;}
   #vsRow .flip{transform:scaleX(-1);}
   #vsText{font-size:44px; color:var(--red); text-shadow:4px 4px 0 #000; animation:vsPulse .5s steps(2) infinite;}
   @keyframes vsPulse{50%{transform:scale(1.15);}}
   .vsName{font-size:10px; margin-top:8px; color:var(--gold);}
-  /* ---------- fight ---------- */
   #fight{justify-content:flex-start; gap:0; padding:0;}
   #hud{width:100%; display:flex; align-items:flex-start; justify-content:space-between; gap:10px; padding:14px 14px 6px; z-index:5;}
   .hpWrap{flex:1; max-width:40%;}
@@ -73,15 +73,12 @@
   .hpFill{position:absolute; top:0; bottom:0; background:linear-gradient(180deg,#8dff5a,#2fbf3f); transition:width 1s linear;}
   .hpFill.low{background:linear-gradient(180deg,#ffd54a,#ff8c2f);}
   .hpFill.crit{background:linear-gradient(180deg,#ff7a7a,#d81f2f);}
-  #p1hpWrap .hpFill{left:0;} 
+  #p1hpWrap .hpFill{left:0;}
   #p2hpWrap{text-align:right;} #p2hpWrap .hpFill{right:0;}
   #roundBadge{font-size:9px; color:#fff; background:var(--red); border:3px solid #000; padding:8px 10px; box-shadow:3px 3px 0 #000; white-space:nowrap;}
-  /* arena */
   #arena{
     position:relative; width:100%; flex:1; overflow:hidden;
-    background:
-      linear-gradient(180deg, var(--sky1) 0%, var(--sky2) 62%, var(--sky2) 62%),
-      var(--sky2);
+    background:linear-gradient(180deg, var(--sky1) 0%, var(--sky2) 62%), var(--sky2);
   }
   #arena .sun{position:absolute; top:16px; right:60px; width:52px; height:52px; background:var(--gold); box-shadow:0 0 0 6px rgba(255,213,74,.35);}
   #arena .cloud{position:absolute; height:16px; background:#fff; box-shadow:16px -10px 0 #fff, 34px 0 0 #fff;}
@@ -107,7 +104,6 @@
   @keyframes shake{25%{transform:translateX(-8px);}50%{transform:translateX(8px);}75%{transform:translateX(-5px);}}
   #bam{position:absolute; font-size:26px; color:var(--gold); text-shadow:3px 3px 0 var(--red), 6px 6px 0 #000; z-index:6; display:none; animation:bam .5s steps(3);}
   @keyframes bam{0%{transform:scale(.3);}60%{transform:scale(1.3);}100%{transform:scale(1);}}
-  /* question panel */
   #qPanel{width:100%; background:var(--panel); border-top:4px solid var(--line); padding:14px; z-index:5;}
   #qText{font-size:clamp(10px,1.8vw,13px); line-height:1.8; margin-bottom:12px; min-height:44px; color:#fff;}
   #answers{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
@@ -119,7 +115,6 @@
   .ansBtn.wrong{background:#571b22; border-color:var(--red); color:var(--red);}
   #feedback{font-size:11px; margin-top:10px; min-height:16px;}
   #feedback.good{color:var(--green);} #feedback.bad{color:var(--red);}
-  /* result */
   #resultTitle{font-size:clamp(22px,5vw,40px); text-shadow:4px 4px 0 #000;}
   #resultTitle.win{color:var(--gold);} #resultTitle.lose{color:var(--red);}
   #resultSprite{height:170px; image-rendering:pixelated;}
@@ -129,18 +124,28 @@
 <body>
 <div id="game">
 
-  <!-- TITLE + TOPIC SELECT -->
+  <!-- TITLE + DARJAH SELECT -->
   <div class="screen active" id="scrTitle">
     <h1>KUIZ FIGHTER</h1>
     <div class="subtitle">JAWAB BETUL &middot; SERANG LAWAN!</div>
-    <div class="subtitle blink" style="color:#fff;">PILIH TOPIK</div>
-    <div id="topicGrid" style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;"></div>
+    <div class="subtitle blink" style="color:#fff;">PILIH DARJAH</div>
+    <div class="btnGrid" id="darjahGrid"></div>
     <div class="small">Betul = kamu serang &middot; Salah = lawan serang</div>
+  </div>
+
+  <!-- SUBJECT SELECT -->
+  <div class="screen" id="scrSubject">
+    <button class="btn backBtn" onclick="show('scrTitle')">&lt; KEMBALI</button>
+    <div class="crumb" id="crumbSubject"></div>
+    <h2>PILIH SUBJEK</h2>
+    <div class="btnGrid" id="subjectGrid"></div>
   </div>
 
   <!-- CHARACTER SELECT -->
   <div class="screen" id="scrChar">
-    <h1 style="font-size:18px;">PILIH WATAK KAMU</h1>
+    <button class="btn backBtn" onclick="show('scrSubject')">&lt; KEMBALI</button>
+    <div class="crumb" id="crumbChar"></div>
+    <h2>PILIH WATAK KAMU</h2>
     <div id="charGrid"></div>
   </div>
 
@@ -192,7 +197,7 @@
     <div style="display:flex; gap:14px; flex-wrap:wrap; justify-content:center;">
       <button class="btn" onclick="startVS()">LAWAN LAGI</button>
       <button class="btn" onclick="show('scrChar')">TUKAR WATAK</button>
-      <button class="btn" onclick="location.reload()">TUKAR TOPIK</button>
+      <button class="btn" onclick="show('scrTitle')">MENU UTAMA</button>
     </div>
   </div>
 </div>
@@ -203,15 +208,22 @@
    ===================================================== */
 const CHARACTERS = ["aisyah", "hikmah", "adib", "irfan"]; // mesti sama dengan nama folder dalam assets/characters/
 const MAX_HP = 100;
-const DAMAGE = 20;            // setiap jawapan = 20 mata (5 jawapan untuk menang)
+const DAMAGE = 20;   // setiap jawapan = 20 mata (5 jawapan untuk menang)
 
-/* ---------- topic registry (questions/*.js call this) ---------- */
-const TOPICS = {};
-function registerTopic(name, questions){ TOPICS[name] = questions; }
+/* ---------- question registry (questions/*.js call this) ---------- */
+const BANK = {};   // BANK["Darjah 1"]["Sains"] = [ {q, a, c}, ... ]
+function daftar(darjah, subjek, soalan){
+  if(!BANK[darjah]) BANK[darjah] = {};
+  BANK[darjah][subjek] = soalan;
+}
 </script>
-<!-- ===== TAMBAH TOPIK BARU: letak fail dalam questions/ dan tambah satu baris di sini ===== -->
-<script src="questions/sains.js"></script>
-<script src="questions/bahasa.js"></script>
+<!-- ===== FAIL SOALAN: satu fail untuk setiap darjah ===== -->
+<script src="questions/darjah1.js"></script>
+<script src="questions/darjah2.js"></script>
+<script src="questions/darjah3.js"></script>
+<script src="questions/darjah4.js"></script>
+<script src="questions/darjah5.js"></script>
+<script src="questions/darjah6.js"></script>
 <script>
 /* ===================================================== */
 const $ = id => document.getElementById(id);
@@ -248,23 +260,36 @@ const FRAMES = ["idle1","idle2","idle3","idle4","attack1","attack2","attack3","h
 CHARACTERS.forEach(c => FRAMES.forEach(f => { const i = new Image(); i.src = sprite(c,f); }));
 
 /* --- state --- */
-let topic = null, deck = [], qIndex = 0, qCount = 0;
+let darjah = null, subjek = null, deck = [], qIndex = 0, qCount = 0;
 let p1Char = null, p2Char = null, p1HP = MAX_HP, p2HP = MAX_HP;
 let idleTimer = null, busy = false;
 
-/* --- topic select --- */
-Object.keys(TOPICS).forEach(name => {
+/* --- darjah select --- */
+Object.keys(BANK).forEach(d => {
   const b = document.createElement('button');
-  b.className = 'btn'; b.textContent = name.toUpperCase();
-  b.onclick = () => { sfx.select(); topic = name; buildCharSelect(); show('scrChar'); };
-  $('topicGrid').appendChild(b);
+  b.className = 'btn'; b.textContent = d.toUpperCase();
+  b.onclick = () => { sfx.select(); darjah = d; buildSubjects(); show('scrSubject'); };
+  $('darjahGrid').appendChild(b);
 });
-if(Object.keys(TOPICS).length === 0){
-  $('topicGrid').innerHTML = '<div class="small">Tiada topik dijumpai. Semak folder questions/</div>';
+if(Object.keys(BANK).length === 0){
+  $('darjahGrid').innerHTML = '<div class="small">Tiada soalan dijumpai. Semak folder questions/</div>';
+}
+
+/* --- subject select --- */
+function buildSubjects(){
+  $('crumbSubject').textContent = darjah.toUpperCase();
+  $('subjectGrid').innerHTML = '';
+  Object.keys(BANK[darjah]).forEach(s => {
+    const b = document.createElement('button');
+    b.className = 'btn'; b.textContent = s.toUpperCase();
+    b.onclick = () => { sfx.select(); subjek = s; buildCharSelect(); show('scrChar'); };
+    $('subjectGrid').appendChild(b);
+  });
 }
 
 /* --- character select --- */
 function buildCharSelect(){
+  $('crumbChar').textContent = darjah.toUpperCase() + ' \u00B7 ' + subjek.toUpperCase();
   $('charGrid').innerHTML = '';
   CHARACTERS.forEach(c => {
     const d = document.createElement('div');
@@ -292,7 +317,7 @@ function startVS(){
 /* --- fight --- */
 function startFight(){
   p1HP = MAX_HP; p2HP = MAX_HP; qCount = 0; busy = false;
-  deck = shuffle([...TOPICS[topic]]); qIndex = 0;
+  deck = shuffle([...BANK[darjah][subjek]]); qIndex = 0;
   $('p1Name').textContent = p1Char.toUpperCase() + ' (KAMU)';
   $('p2Name').textContent = p2Char.toUpperCase();
   updateHP();
@@ -317,9 +342,7 @@ function startIdle(){
 }
 function stopIdle(){ if(idleTimer){ clearInterval(idleTimer); idleTimer = null; } }
 
-function updateHP(){
-  setBar($('p1hp'), p1HP); setBar($('p2hp'), p2HP);
-}
+function updateHP(){ setBar($('p1hp'), p1HP); setBar($('p2hp'), p2HP); }
 function setBar(el, hp){
   el.style.width = Math.max(0, hp) + '%';
   el.classList.toggle('low', hp <= 60 && hp > 30);
@@ -327,18 +350,17 @@ function setBar(el, hp){
 }
 
 function nextQuestion(){
-  if(qIndex >= deck.length){ deck = shuffle([...TOPICS[topic]]); qIndex = 0; }
+  if(qIndex >= deck.length){ deck = shuffle([...BANK[darjah][subjek]]); qIndex = 0; }
   const q = deck[qIndex++];
   qCount++;
   $('qNum').textContent = qCount;
-  $('qText').textContent = q.question;
+  $('qText').textContent = q.q;
   $('feedback').textContent = ''; $('feedback').className = '';
   const box = $('answers'); box.innerHTML = '';
-  // shuffle answer order but remember the correct one
-  const order = shuffle(q.answers.map((a,i)=>({a, ok: i === q.correct})));
+  const order = shuffle(q.a.map((ans,i)=>({ans, ok: i === q.c})));
   order.forEach(o => {
     const b = document.createElement('button');
-    b.className = 'ansBtn'; b.textContent = o.a;
+    b.className = 'ansBtn'; b.textContent = o.ans;
     b.onclick = () => answer(b, o.ok, order);
     box.appendChild(b);
   });
@@ -378,19 +400,15 @@ function attack(attacker){
     defImg.src = sprite(defCh,'hit');
     defEl.classList.add('shake');
     sfx.punch();
-    // POW! text near defender
     const bam = $('bam');
     bam.style.left = attacker === 1 ? '62%' : '24%';
     bam.style.top = '30%';
     bam.textContent = ['POW!','BAM!','ZAP!'][Math.floor(Math.random()*3)];
     bam.style.display = 'block';
-    // HP drops slowly (CSS transition does the drain)
     if(attacker === 1){ p2HP -= DAMAGE; } else { p1HP -= DAMAGE; }
     updateHP();
   }, 350);
-  setTimeout(() => {
-    atkImg.src = sprite(atkCh,'attack3');
-  }, 700);
+  setTimeout(() => { atkImg.src = sprite(atkCh,'attack3'); }, 700);
   setTimeout(() => {
     $('bam').style.display = 'none';
     defEl.classList.remove('shake');
@@ -412,7 +430,6 @@ function endFight(){
     : `Jangan putus asa! Cuba lagi, ${p1Char.toUpperCase()}!`;
   playerWon ? sfx.win() : sfx.lose();
   show('scrResult');
-  // winner celebration animation
   const winner = playerWon ? p1Char : p2Char;
   let f = 0;
   const t = setInterval(() => {
