@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kuiz Fighter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#101423; --panel:#1a2036; --line:#3d4a78;
+    --gold:#ffd54a; --red:#ff4d5a; --green:#4dff88; --blue:#5ac8ff;
+    --sky1:#7ec8ff; --sky2:#bfe6ff; --grass:#59b93c; --dirt:#7a4a2b;
+  }
+  *{box-sizing:border-box; margin:0; padding:0; user-select:none;}
+  html,body{height:100%;}
+  body{
+    background:var(--bg);
+    font-family:'Press Start 2P', monospace;
+    color:#fff; display:flex; align-items:center; justify-content:center;
+    image-rendering:pixelated;
+  }
+  #game{
+    width:min(960px,100vw); height:min(600px,100vh);
+    position:relative; overflow:hidden;
+    background:var(--bg);
+    border:4px solid var(--line);
+    box-shadow:0 0 40px #000;
+  }
+  /* CRT scanlines */
+  #game::after{
+    content:''; position:absolute; inset:0; pointer-events:none; z-index:99;
+    background:repeating-linear-gradient(0deg, rgba(0,0,0,.12) 0 2px, transparent 2px 4px);
+  }
+  .screen{position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center; gap:24px; padding:24px; text-align:center;}
+  .screen.active{display:flex;}
+  h1{font-size:clamp(20px,4vw,34px); color:var(--gold); text-shadow:4px 4px 0 #7a1f1f, 8px 8px 0 #000; line-height:1.4;}
+  .subtitle{font-size:10px; color:var(--blue); letter-spacing:2px;}
+  .blink{animation:blink 1s steps(2) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .btn{
+    font-family:inherit; font-size:12px; color:#fff; cursor:pointer;
+    background:var(--panel); border:3px solid var(--line);
+    padding:14px 22px; box-shadow:4px 4px 0 #000;
+    transition:transform .05s;
+  }
+  .btn:hover{border-color:var(--gold); color:var(--gold); transform:translate(-1px,-1px);}
+  .btn:active{transform:translate(2px,2px); box-shadow:1px 1px 0 #000;}
+  /* ---------- character select ---------- */
+  #charGrid{display:flex; gap:18px; flex-wrap:wrap; justify-content:center;}
+  .charCard{
+    width:130px; padding:12px 8px 10px; cursor:pointer;
+    background:var(--panel); border:3px solid var(--line); box-shadow:4px 4px 0 #000;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+  }
+  .charCard img{height:96px; image-rendering:pixelated;}
+  .charCard .cname{font-size:9px; color:var(--blue); text-transform:uppercase;}
+  .charCard:hover{border-color:var(--gold);} 
+  .charCard:hover .cname{color:var(--gold);}
+  /* ---------- VS splash ---------- */
+  #vsRow{display:flex; align-items:center; gap:40px;}
+  #vsRow img{height:150px; image-rendering:pixelated;}
+  #vsRow .flip{transform:scaleX(-1);}
+  #vsText{font-size:44px; color:var(--red); text-shadow:4px 4px 0 #000; animation:vsPulse .5s steps(2) infinite;}
+  @keyframes vsPulse{50%{transform:scale(1.15);}}
+  .vsName{font-size:10px; margin-top:8px; color:var(--gold);}
+  /* ---------- fight ---------- */
+  #fight{justify-content:flex-start; gap:0; padding:0;}
+  #hud{width:100%; display:flex; align-items:flex-start; justify-content:space-between; gap:10px; padding:14px 14px 6px; z-index:5;}
+  .hpWrap{flex:1; max-width:40%;}
+  .hpName{font-size:9px; margin-bottom:5px; color:var(--gold); text-shadow:2px 2px 0 #000;}
+  .hpBar{height:20px; border:3px solid #000; background:#3a0d12; box-shadow:0 0 0 2px var(--line); position:relative; overflow:hidden;}
+  .hpFill{position:absolute; top:0; bottom:0; background:linear-gradient(180deg,#8dff5a,#2fbf3f); transition:width 1s linear;}
+  .hpFill.low{background:linear-gradient(180deg,#ffd54a,#ff8c2f);}
+  .hpFill.crit{background:linear-gradient(180deg,#ff7a7a,#d81f2f);}
+  #p1hpWrap .hpFill{left:0;} 
+  #p2hpWrap{text-align:right;} #p2hpWrap .hpFill{right:0;}
+  #roundBadge{font-size:9px; color:#fff; background:var(--red); border:3px solid #000; padding:8px 10px; box-shadow:3px 3px 0 #000; white-space:nowrap;}
+  /* arena */
+  #arena{
+    position:relative; width:100%; flex:1; overflow:hidden;
+    background:
+      linear-gradient(180deg, var(--sky1) 0%, var(--sky2) 62%, var(--sky2) 62%),
+      var(--sky2);
+  }
+  #arena .sun{position:absolute; top:16px; right:60px; width:52px; height:52px; background:var(--gold); box-shadow:0 0 0 6px rgba(255,213,74,.35);}
+  #arena .cloud{position:absolute; height:16px; background:#fff; box-shadow:16px -10px 0 #fff, 34px 0 0 #fff;}
+  #arena .skyline{position:absolute; bottom:26%; left:0; right:0; height:70px;
+    background:
+      linear-gradient(#9fb6d8,#9fb6d8) 4% 100%/60px 46px no-repeat,
+      linear-gradient(#8ea8ce,#8ea8ce) 16% 100%/44px 64px no-repeat,
+      linear-gradient(#9fb6d8,#9fb6d8) 30% 100%/70px 38px no-repeat,
+      linear-gradient(#8ea8ce,#8ea8ce) 55% 100%/50px 58px no-repeat,
+      linear-gradient(#9fb6d8,#9fb6d8) 72% 100%/64px 44px no-repeat,
+      linear-gradient(#8ea8ce,#8ea8ce) 90% 100%/46px 66px no-repeat;
+    opacity:.8;}
+  #ground{position:absolute; bottom:0; left:0; right:0; height:26%;
+    background:linear-gradient(180deg, var(--grass) 0 18px, #3f8f2a 18px 24px, var(--dirt) 24px 100%);}
+  .fighter{position:absolute; bottom:24%; height:38%; transition:transform .18s;}
+  .fighter img{height:100%; image-rendering:pixelated; filter:drop-shadow(0 6px 0 rgba(0,0,0,.25));}
+  #p1{left:14%;}
+  #p2{right:14%;}
+  #p2 img{transform:scaleX(-1);}
+  .lunge1{transform:translateX(46px);}
+  .lunge2{transform:translateX(-46px);}
+  .shake{animation:shake .4s steps(4);}
+  @keyframes shake{25%{transform:translateX(-8px);}50%{transform:translateX(8px);}75%{transform:translateX(-5px);}}
+  #bam{position:absolute; font-size:26px; color:var(--gold); text-shadow:3px 3px 0 var(--red), 6px 6px 0 #000; z-index:6; display:none; animation:bam .5s steps(3);}
+  @keyframes bam{0%{transform:scale(.3);}60%{transform:scale(1.3);}100%{transform:scale(1);}}
+  /* question panel */
+  #qPanel{width:100%; background:var(--panel); border-top:4px solid var(--line); padding:14px; z-index:5;}
+  #qText{font-size:clamp(10px,1.8vw,13px); line-height:1.8; margin-bottom:12px; min-height:44px; color:#fff;}
+  #answers{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .ansBtn{font-family:inherit; font-size:clamp(9px,1.5vw,11px); line-height:1.5; padding:12px 10px; cursor:pointer;
+    background:#232c4d; color:#fff; border:3px solid var(--line); box-shadow:3px 3px 0 #000; text-align:left;}
+  .ansBtn:hover:not(:disabled){border-color:var(--gold); color:var(--gold);}
+  .ansBtn:disabled{cursor:default; opacity:.85;}
+  .ansBtn.correct{background:#14522b; border-color:var(--green); color:var(--green);}
+  .ansBtn.wrong{background:#571b22; border-color:var(--red); color:var(--red);}
+  #feedback{font-size:11px; margin-top:10px; min-height:16px;}
+  #feedback.good{color:var(--green);} #feedback.bad{color:var(--red);}
+  /* result */
+  #resultTitle{font-size:clamp(22px,5vw,40px); text-shadow:4px 4px 0 #000;}
+  #resultTitle.win{color:var(--gold);} #resultTitle.lose{color:var(--red);}
+  #resultSprite{height:170px; image-rendering:pixelated;}
+  .small{font-size:9px; color:#8fa3d9; line-height:1.8;}
+</style>
+</head>
+<body>
+<div id="game">
+
+  <!-- TITLE + TOPIC SELECT -->
+  <div class="screen active" id="scrTitle">
+    <h1>KUIZ FIGHTER</h1>
+    <div class="subtitle">JAWAB BETUL &middot; SERANG LAWAN!</div>
+    <div class="subtitle blink" style="color:#fff;">PILIH TOPIK</div>
+    <div id="topicGrid" style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;"></div>
+    <div class="small">Betul = kamu serang &middot; Salah = lawan serang</div>
+  </div>
+
+  <!-- CHARACTER SELECT -->
+  <div class="screen" id="scrChar">
+    <h1 style="font-size:18px;">PILIH WATAK KAMU</h1>
+    <div id="charGrid"></div>
+  </div>
+
+  <!-- VS SPLASH -->
+  <div class="screen" id="scrVS">
+    <div id="vsRow">
+      <div><img id="vsP1" alt=""><div class="vsName" id="vsP1Name"></div></div>
+      <div id="vsText">VS</div>
+      <div><img id="vsP2" class="flip" alt=""><div class="vsName" id="vsP2Name"></div></div>
+    </div>
+    <div class="subtitle blink">SEDIA...</div>
+  </div>
+
+  <!-- FIGHT -->
+  <div class="screen" id="fight">
+    <div id="hud">
+      <div class="hpWrap" id="p1hpWrap">
+        <div class="hpName" id="p1Name"></div>
+        <div class="hpBar"><div class="hpFill" id="p1hp" style="width:100%;"></div></div>
+      </div>
+      <div id="roundBadge">SOALAN <span id="qNum">1</span></div>
+      <div class="hpWrap" id="p2hpWrap">
+        <div class="hpName" id="p2Name"></div>
+        <div class="hpBar"><div class="hpFill" id="p2hp" style="width:100%;"></div></div>
+      </div>
+    </div>
+    <div id="arena">
+      <div class="sun"></div>
+      <div class="cloud" style="top:34px; left:12%; width:40px;"></div>
+      <div class="cloud" style="top:70px; left:58%; width:52px;"></div>
+      <div class="skyline"></div>
+      <div id="ground"></div>
+      <div class="fighter" id="p1"><img id="p1img" alt=""></div>
+      <div class="fighter" id="p2"><img id="p2img" alt=""></div>
+      <div id="bam">POW!</div>
+    </div>
+    <div id="qPanel">
+      <div id="qText"></div>
+      <div id="answers"></div>
+      <div id="feedback"></div>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen" id="scrResult">
+    <div id="resultTitle"></div>
+    <img id="resultSprite" alt="">
+    <div class="small" id="resultMsg"></div>
+    <div style="display:flex; gap:14px; flex-wrap:wrap; justify-content:center;">
+      <button class="btn" onclick="startVS()">LAWAN LAGI</button>
+      <button class="btn" onclick="show('scrChar')">TUKAR WATAK</button>
+      <button class="btn" onclick="location.reload()">TUKAR TOPIK</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================
+   TETAPAN (SETTINGS) — ubah di sini kalau perlu
+   ===================================================== */
+const CHARACTERS = ["aisyah", "hikmah", "adib", "irfan"]; // mesti sama dengan nama folder dalam assets/characters/
+const MAX_HP = 100;
+const DAMAGE = 20;            // setiap jawapan = 20 mata (5 jawapan untuk menang)
+
+/* ---------- topic registry (questions/*.js call this) ---------- */
+const TOPICS = {};
+function registerTopic(name, questions){ TOPICS[name] = questions; }
+</script>
+<!-- ===== TAMBAH TOPIK BARU: letak fail dalam questions/ dan tambah satu baris di sini ===== -->
+<script src="questions/sains.js"></script>
+<script src="questions/bahasa.js"></script>
+<script>
+/* ===================================================== */
+const $ = id => document.getElementById(id);
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  $(id).classList.add('active');
+}
+function sprite(ch, frame){ return `assets/characters/${ch}/${frame}.png`; }
+
+/* --- tiny retro sound (WebAudio, no files needed) --- */
+let AC;
+function beep(freq, dur, type='square', vol=.08){
+  try{
+    AC = AC || new (window.AudioContext||window.webkitAudioContext)();
+    const o = AC.createOscillator(), g = AC.createGain();
+    o.type = type; o.frequency.value = freq;
+    g.gain.setValueAtTime(vol, AC.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001, AC.currentTime + dur);
+    o.connect(g); g.connect(AC.destination);
+    o.start(); o.stop(AC.currentTime + dur);
+  }catch(e){}
+}
+const sfx = {
+  select(){ beep(660,.08); },
+  punch(){ beep(180,.12,'sawtooth',.12); setTimeout(()=>beep(120,.15,'sawtooth',.12),60); },
+  good(){ beep(660,.1); setTimeout(()=>beep(880,.15),100); },
+  bad(){ beep(200,.2,'sawtooth'); setTimeout(()=>beep(150,.25,'sawtooth'),120); },
+  win(){ [523,659,784,1047].forEach((f,i)=>setTimeout(()=>beep(f,.18),i*140)); },
+  lose(){ [400,350,300,220].forEach((f,i)=>setTimeout(()=>beep(f,.2,'sawtooth'),i*160)); },
+};
+
+/* --- preload all sprites --- */
+const FRAMES = ["idle1","idle2","idle3","idle4","attack1","attack2","attack3","hit","win1","win2","win3"];
+CHARACTERS.forEach(c => FRAMES.forEach(f => { const i = new Image(); i.src = sprite(c,f); }));
+
+/* --- state --- */
+let topic = null, deck = [], qIndex = 0, qCount = 0;
+let p1Char = null, p2Char = null, p1HP = MAX_HP, p2HP = MAX_HP;
+let idleTimer = null, busy = false;
+
+/* --- topic select --- */
+Object.keys(TOPICS).forEach(name => {
+  const b = document.createElement('button');
+  b.className = 'btn'; b.textContent = name.toUpperCase();
+  b.onclick = () => { sfx.select(); topic = name; buildCharSelect(); show('scrChar'); };
+  $('topicGrid').appendChild(b);
+});
+if(Object.keys(TOPICS).length === 0){
+  $('topicGrid').innerHTML = '<div class="small">Tiada topik dijumpai. Semak folder questions/</div>';
+}
+
+/* --- character select --- */
+function buildCharSelect(){
+  $('charGrid').innerHTML = '';
+  CHARACTERS.forEach(c => {
+    const d = document.createElement('div');
+    d.className = 'charCard';
+    d.innerHTML = `<img src="${sprite(c,'idle1')}" alt="${c}"><div class="cname">${c}</div>`;
+    d.onclick = () => { sfx.select(); p1Char = c; pickOpponent(); startVS(); };
+    $('charGrid').appendChild(d);
+  });
+}
+function pickOpponent(){
+  const pool = CHARACTERS.filter(c => c !== p1Char);
+  p2Char = pool[Math.floor(Math.random() * pool.length)];
+}
+
+/* --- VS splash --- */
+function startVS(){
+  if(!p2Char) pickOpponent();
+  $('vsP1').src = sprite(p1Char,'idle1'); $('vsP1Name').textContent = p1Char.toUpperCase();
+  $('vsP2').src = sprite(p2Char,'idle1'); $('vsP2Name').textContent = p2Char.toUpperCase();
+  show('scrVS');
+  beep(440,.15); setTimeout(()=>beep(440,.15),400); setTimeout(()=>beep(880,.3),800);
+  setTimeout(startFight, 1800);
+}
+
+/* --- fight --- */
+function startFight(){
+  p1HP = MAX_HP; p2HP = MAX_HP; qCount = 0; busy = false;
+  deck = shuffle([...TOPICS[topic]]); qIndex = 0;
+  $('p1Name').textContent = p1Char.toUpperCase() + ' (KAMU)';
+  $('p2Name').textContent = p2Char.toUpperCase();
+  updateHP();
+  $('p1img').src = sprite(p1Char,'idle1');
+  $('p2img').src = sprite(p2Char,'idle1');
+  startIdle();
+  show('fight');
+  nextQuestion();
+}
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+function startIdle(){
+  stopIdle();
+  let f = 0;
+  idleTimer = setInterval(() => {
+    f = (f + 1) % 4;
+    if(!busy){
+      $('p1img').src = sprite(p1Char, 'idle' + (f+1));
+      $('p2img').src = sprite(p2Char, 'idle' + (((f+2)%4)+1));
+    }
+  }, 260);
+}
+function stopIdle(){ if(idleTimer){ clearInterval(idleTimer); idleTimer = null; } }
+
+function updateHP(){
+  setBar($('p1hp'), p1HP); setBar($('p2hp'), p2HP);
+}
+function setBar(el, hp){
+  el.style.width = Math.max(0, hp) + '%';
+  el.classList.toggle('low', hp <= 60 && hp > 30);
+  el.classList.toggle('crit', hp <= 30);
+}
+
+function nextQuestion(){
+  if(qIndex >= deck.length){ deck = shuffle([...TOPICS[topic]]); qIndex = 0; }
+  const q = deck[qIndex++];
+  qCount++;
+  $('qNum').textContent = qCount;
+  $('qText').textContent = q.question;
+  $('feedback').textContent = ''; $('feedback').className = '';
+  const box = $('answers'); box.innerHTML = '';
+  // shuffle answer order but remember the correct one
+  const order = shuffle(q.answers.map((a,i)=>({a, ok: i === q.correct})));
+  order.forEach(o => {
+    const b = document.createElement('button');
+    b.className = 'ansBtn'; b.textContent = o.a;
+    b.onclick = () => answer(b, o.ok, order);
+    box.appendChild(b);
+  });
+  busy = false;
+}
+
+function answer(btn, ok, order){
+  if(busy) return; busy = true;
+  document.querySelectorAll('.ansBtn').forEach(b => b.disabled = true);
+  if(ok){
+    btn.classList.add('correct');
+    $('feedback').textContent = 'BETUL! SERANG!'; $('feedback').className = 'good';
+    sfx.good();
+    setTimeout(() => attack(1), 500);
+  }else{
+    btn.classList.add('wrong');
+    document.querySelectorAll('.ansBtn').forEach((b,i) => { if(order[i].ok) b.classList.add('correct'); });
+    $('feedback').textContent = 'SALAH! JAGA-JAGA!'; $('feedback').className = 'bad';
+    sfx.bad();
+    setTimeout(() => attack(2), 500);
+  }
+}
+
+/* attacker: 1 = player attacks p2, 2 = npc attacks p1 */
+function attack(attacker){
+  const atkImg = attacker === 1 ? $('p1img') : $('p2img');
+  const defImg = attacker === 1 ? $('p2img') : $('p1img');
+  const atkCh  = attacker === 1 ? p1Char : p2Char;
+  const defCh  = attacker === 1 ? p2Char : p1Char;
+  const atkEl  = attacker === 1 ? $('p1') : $('p2');
+  const defEl  = attacker === 1 ? $('p2') : $('p1');
+
+  atkImg.src = sprite(atkCh,'attack1');
+  atkEl.classList.add(attacker === 1 ? 'lunge1' : 'lunge2');
+  setTimeout(() => {
+    atkImg.src = sprite(atkCh,'attack2');
+    defImg.src = sprite(defCh,'hit');
+    defEl.classList.add('shake');
+    sfx.punch();
+    // POW! text near defender
+    const bam = $('bam');
+    bam.style.left = attacker === 1 ? '62%' : '24%';
+    bam.style.top = '30%';
+    bam.textContent = ['POW!','BAM!','ZAP!'][Math.floor(Math.random()*3)];
+    bam.style.display = 'block';
+    // HP drops slowly (CSS transition does the drain)
+    if(attacker === 1){ p2HP -= DAMAGE; } else { p1HP -= DAMAGE; }
+    updateHP();
+  }, 350);
+  setTimeout(() => {
+    atkImg.src = sprite(atkCh,'attack3');
+  }, 700);
+  setTimeout(() => {
+    $('bam').style.display = 'none';
+    defEl.classList.remove('shake');
+    atkEl.classList.remove('lunge1','lunge2');
+    atkImg.src = sprite(atkCh,'idle1');
+    defImg.src = sprite(defCh,'idle1');
+    if(p1HP <= 0 || p2HP <= 0){ setTimeout(endFight, 1100); }
+    else { setTimeout(nextQuestion, 500); }
+  }, 1100);
+}
+
+function endFight(){
+  stopIdle();
+  const playerWon = p2HP <= 0;
+  $('resultTitle').textContent = playerWon ? 'KAMU MENANG!' : 'KAMU KALAH!';
+  $('resultTitle').className = playerWon ? 'win' : 'lose';
+  $('resultMsg').textContent = playerWon
+    ? `Hebat! ${p1Char.toUpperCase()} menang selepas ${qCount} soalan!`
+    : `Jangan putus asa! Cuba lagi, ${p1Char.toUpperCase()}!`;
+  playerWon ? sfx.win() : sfx.lose();
+  show('scrResult');
+  // winner celebration animation
+  const winner = playerWon ? p1Char : p2Char;
+  let f = 0;
+  const t = setInterval(() => {
+    if(!$('scrResult').classList.contains('active')){ clearInterval(t); return; }
+    $('resultSprite').src = sprite(winner, 'win' + ((f % 3) + 1));
+    f++;
+  }, 280);
+}
+</script>
+</body>
+</html>
