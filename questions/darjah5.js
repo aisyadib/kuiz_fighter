@@ -12,7 +12,22 @@ daftar("Darjah 5", "Bahasa Melayu", [
   {q:"Apakah lawan bagi perkataan 'untung'?", a:["Laba","Rugi","Lebih","Menang"], c:1},
   {q:"Yang manakah kata bilangan tak tentu?", a:["Lima","Kedua","Beberapa","Sepuluh"], c:2},
   {q:"Apakah maksud simpulan bahasa 'bulat hati'?", a:["Gemuk","Tekad yang kuat","Baik hati","Pemurah"], c:1},
-  {q:"'Murid-murid ___ ke dewan oleh guru.' Pilih perkataan yang betul.", a:["membawa","dibawa","bawa","pembawa"], c:1}
+  {q:"'Murid-murid ___ ke dewan oleh guru.' Pilih perkataan yang betul.", a:["membawa","dibawa","bawa","pembawa"], c:1},
+  /* --- Soalan tambahan daripada modul PPMP & kertas PAT (jawapan disemak) --- */
+  {q:"Pilih jawapan yang sesuai bagi ayat tanya di bawah. Mengapakah kaki kamu terseliuh ?", a:["Saya tidak nampak lantai itu licin.","Saya tergelincir di bilik mandi.","Saya berlari keliling padang.","Saya kurang memberikan perhatian."], c:1},
+  {q:"Pilih jawapan yang sesuai bagi ayat tanya di bawah. Mengapakah kanak-kanak tidak dibenarkan mandi di sungai itu?", a:["Arus sungai itu sangat deras.","Tidak ramai orang mandi-manda di situ.","Sebuah kilang didirikan di tepi sungai itu.","Sungai itu sangat cetek dan berpasir."], c:0},
+  {q:"Pilih ayat tanya yang sesuai bagi jawapan di bawah. Pengusaha kain batik itu sentiasa memberikan layanan mesra kepada pelanggannya.", a:["Bilakah pengusaha kain batik itu membuat pelanggannya berasa puas hati?","Bagaimanakan pengusaha kain batik itu menjaga hati pelanggannya?","Mengapakah pengusaha kain batik itu mengutamakan pelanggannya?","Siapakah yang dilayan oleh pengusaha restoran itu?"], c:1},
+  {q:"“Wahai, Tuah! Pada pendapat ____________ eloklah kita berangkat sekarang,” kata Hang Jebat.", a:["beta","patik","hamba","tuan hamba"], c:3},
+  {q:"Ibu ____________ sedulang air kopi untuk tetamu yang bertandang.", a:["mengelek","menatang","menjinjing","mengusung"], c:1},
+  {q:"Jururawat itu berdiri di ____________ katil sambil memeriksa suhu badan pesakit.", a:["sisi","atas","antara","hujung"], c:0},
+  {q:"Tangan ibu berbau ____________ setelah menyiang beberapa ekor udang galah.", a:["hanyir","hamis","hapak","hancing"], c:0},
+  {q:"Puan Kamalia ____________ubat herba untuk anaknya yang sakit.", a:["memasak","mereneh","menanak","menjerang"], c:1},
+  {q:"Murid-murid ____________tangan semasa membentuk bulatan di padang .", a:["pegangan","pemegang","memegang","berpegangan"], c:3},
+  {q:"Kepala paip hendaklah ditutup ____________ untuk mengelakkan pembaziran air", a:["erat-erat","ketat-ketat","rapat-rapat","cukup-cukup"], c:1},
+  {q:"Dia memang ____________, segala nasihat daripada orang tua dan kawan-kawan tidak dihiraukannya.", a:["naik kepala","sakit kepala","keras kepala","dalam kepala"], c:2},
+  {q:"Beberapa ____________ pisang nangka di kebun Pak Wan sudah tua.", a:["biji","sisir","sikat","tandan"], c:3},
+  {q:"Salim sedang menyembur ____________ pada badannya selepas mandi.", a:["minyak hitam","minyak rambut","minyak masak","minyak wangi"], c:3},
+  {q:"Pergerakan pemain bola keranjang yang ____________ itu sukar dikawal oleh pihak lawan.", a:["tangkas","pandai","cermat","laju"], c:0}
 ]);
 
 daftar("Darjah 5", "English", [

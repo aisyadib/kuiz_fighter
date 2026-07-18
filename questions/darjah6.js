@@ -12,7 +12,15 @@ daftar("Darjah 6", "Bahasa Melayu", [
   {q:"Apakah lawan bagi perkataan 'sementara'?", a:["Sekejap","Kekal","Singkat","Cepat"], c:1},
   {q:"Yang manakah menggunakan imbuhan pinjaman 'juru-'?", a:["Juruterbang","Berlari","Makanan","Tercantik"], c:0},
   {q:"Yang manakah ayat majmuk?", a:["Ali membaca buku.","Ali membaca buku dan Abu menulis karangan.","Ali rajin.","Buku itu tebal."], c:1},
-  {q:"Apakah maksud peribahasa 'bagai aur dengan tebing'?", a:["Saling membantu","Selalu bergaduh","Tidak berjumpa","Hidup sendirian"], c:0}
+  {q:"Apakah maksud peribahasa 'bagai aur dengan tebing'?", a:["Saling membantu","Selalu bergaduh","Tidak berjumpa","Hidup sendirian"], c:0},
+  /* --- Soalan tambahan daripada modul PPMP & kertas PAT (jawapan disemak) --- */
+  {q:"“Pengawal, izinkan masuk menghadap sultan untuk melaporkan kes kecurian di pelabuhan Melaka,” kata Temenggung kepada pengawal istana.", a:["patik ... baginda","hamba ... baginda","patik ... tuan hamba","hamba ... tuan hamba"], c:1},
+  {q:"Bendahara: Baginda akan untuk menyampaikan bantuan makanan kepada rakyat jelata di balairung istana pada pagi esok. Laksamana: Baiklah, akan hamba uruskan segala persiapan dengan segera.", a:["menerima menghadap","menjunjung titah","merafak sembah","mencemar duli"], c:3},
+  {q:"Pilih ayat tanya yang sesuai bagi jawapan yang diberikan. Pembinaan bangunan tambahan sekolah itu diminta oleh penduduk supaya dicepatkan kerana bilangan murid yang semakin bertambah.", a:["Siapakah yang meminta pembinaan bangunan tambahan sekolah itu?","Mengapakah pembinaan bangunan tambahan sekolah itu perlu dicepatkan?","Bilakah penduduk meminta pembinaan bangunan tambahan sekolah itu dicepatkan?","Bagaimanakah pembinaan bangunan"], c:1},
+  {q:"Pelbagai kesan dialami oleh murid-murid jika emosi mereka terganggu kecuali", a:["mereka akan berasa bosan.","mereka tidak suka bergaul dengan kawan- kawan.","mereka lebih suka menyendiri.","mereka dapat berfikir dengan warasnya."], c:3},
+  {q:"“Titah akan laksanakan dengan segera,” kata Laksamana kepada Sultan Muzaffar Syah.", a:["tuanku ... beta","tuanku ... patik","baginda ... hamba","tuan hamba ... hamba"], c:1},
+  {q:"Pilih ayat tanya yang sesuai bagi jawapan yang diberikan. Perpustakaan awam perlu dimanfaatkan terutamanya dalam kalangan remaja untuk melahirkan generasi yang berilmu.", a:["Siapakah yang akan bertanggungjawab untuk melahirkan generasi yang berilmu?","Mengapakah perpustakaan awam perlu dimanfaatkan terutamanya dalam kalangan remaja?","Bilakah generasi yang berilmu perlu memanfaatkan perpustakaan awam?","Bagaimanakah perpustakaan awam dapat"], c:1},
+  {q:"Pilih jawapan yang sesuai bagi ayat tanya yang diberikan. Apakah tindakan yang diambil oleh penduduk Taman Cempaka untuk mengatasi kes kecurian di kawasan kediaman mereka?", a:["Kes kecurian itu berlaku di sekitar kawasan Taman Cempaka.","Mereka berkawal pada waktu malam untuk mengelakkan kejadian itu terus berlaku.","Penduduk Taman Cempaka telah mengenal pasti pihak yang terlibat dengan kes kecurian itu.","Penduduk Taman Cempaka berharap agar"], c:1}
 ]);
 
 daftar("Darjah 6", "English", [
