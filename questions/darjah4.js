@@ -17,7 +17,7 @@ daftar("Darjah 4", "Bahasa Melayu", [
   {q:"\" ______________ berkenan menerima datuk menghadap,\" kata pegawai istana itu kepada Datuk Temenggung.", a:["Patik","Tuanku","Beta","Beliau"], c:1},
   {q:"Mak Bedah berjalan _______________ selepas turun feri dari Langkawi akibat mabuk laut.", a:["tersenggok-senggok","tergopoh-gapah","terhincut-hincut","terhuyung-hayang"], c:3},
   {q:"Nenek yang _______________ itu berjalan perlahan-lahan di belakang rumah.", a:["bengkok","bongkok","condong","serong"], c:1},
-  {q:"Antara aktiviti kokurikulum yang diminati Ai Lin, termasuklah sukan ragbi.", a:["Antara aktiviti kokurikulum yang Ai Lin minati","Antara aktiviti-aktiviti kokurikulum yang Ai Lin minati","Antara aktiviti-aktiviti kokurikulum yang diminati Ai Lin","Antara aktiviti kokurikulum yang diminati Ai Lin"], c:3},
+  {q:"_______________, termasuklah sukan ragbi.", a:["Antara aktiviti kokurikulum yang Ai Lin minati","Antara aktiviti-aktiviti kokurikulum yang Ai Lin minati","Antara aktiviti-aktiviti kokurikulum yang diminati Ai Lin","Antara aktiviti kokurikulum yang diminati Ai Lin"], c:3},
   {q:"Dia menceburi diri dalam bidang perniagaan sejak tahun lepas.", a:["menceburkan diri dalam bidang","menceburi dalam bidang","mencebur bidang","menceburi diri dalam bidang"], c:0},
   {q:"Kami telah berjalan lebih dari dua setengah kilometer.", a:["dari dua kilometer setengah.","daripada dua kilometer setengah.","daripada dua setengah kilometer.","dari dua setengah kilometer."], c:1},
   {q:"Semua gula-gula yang dibeli oleh saya sudah saya berikan kepada adik.", a:["Gula-gula yang saya belikan","Gula-gula yang dibeli oleh saya","Semua gula-gula yang saya beli","Semua gula-gula yang dibeli oleh saya"], c:2},
