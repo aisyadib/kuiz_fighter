@@ -80,3 +80,25 @@ daftar("Darjah 6", "PJK", [
   {q:"Kecederaan terseliuh perlu dituam dengan apa?", a:["Air panas","Ais","Minyak","Pasir"], c:1},
   {q:"Berapakah bilangan pemain sepak takraw dalam satu regu?", a:["2","3","4","5"], c:1}
 ]);
+
+daftar("Darjah 6", "Sejarah", [
+  {q:"Siapakah Bapa Kemerdekaan Malaysia?", a:["Tun Abdul Razak","Tunku Abdul Rahman","Tun Hussein Onn","Dato' Onn Jaafar"], c:1},
+  {q:"Bilakah Tanah Melayu mencapai kemerdekaan?", a:["31 Ogos 1957","16 September 1963","31 Ogos 1963","1 Januari 1957"], c:0},
+  {q:"Bilakah Malaysia dibentuk?", a:["31 Ogos 1957","16 September 1963","13 Mei 1969","31 Ogos 1970"], c:1},
+  {q:"Negeri manakah yang menyertai pembentukan Malaysia pada 1963?", a:["Sabah dan Sarawak","Brunei dan Sabah","Jawa dan Sumatera","Pattani dan Sabah"], c:0},
+  {q:"Rukun Negara diperkenalkan pada tahun berapa?", a:["1957","1963","1970","1990"], c:2},
+  {q:"Siapakah ketua negara Malaysia?", a:["Perdana Menteri","Yang di-Pertuan Agong","Menteri Besar","Ketua Hakim"], c:1},
+  {q:"Berapakah bilangan jalur pada Jalur Gemilang?", a:["13","14","15","16"], c:1},
+  {q:"Apakah undang-undang tertinggi negara?", a:["Perlembagaan Persekutuan","Rukun Negara","Akta Jalan Raya","Undang-undang sekolah"], c:0}
+]);
+
+daftar("Darjah 6", "Reka Bentuk Teknologi", [
+  {q:"Motor elektrik menukarkan tenaga elektrik kepada tenaga apa?", a:["Tenaga kinetik (gerakan)","Tenaga bunyi sahaja","Tenaga cahaya sahaja","Tenaga haba sahaja"], c:0},
+  {q:"Apakah yang perlu disenaraikan untuk menganggar kos projek?", a:["Nama rakan","Bahan dan harga","Warna kegemaran","Cuaca"], c:1},
+  {q:"Apakah maksud 'inovasi'?", a:["Meniru sepenuhnya","Pembaharuan atau penambahbaikan","Membuang produk","Menyimpan produk"], c:1},
+  {q:"Apakah mesin yang digunakan untuk menjahit dengan cepat?", a:["Mesin jahit","Mesin rumput","Pengisar","Cerek"], c:0},
+  {q:"Apakah alat perlindungan diri semasa kerja bengkel?", a:["Cermin mata keselamatan","Topi keledar basikal","Payung","Selipar"], c:0},
+  {q:"Dalam projek elektromekanikal, apakah yang mengawal pergerakan motor?", a:["Suis","Gam","Kertas","Benang"], c:0},
+  {q:"Apakah lakaran yang menunjukkan objek dari pelbagai sudut?", a:["Lakaran 3 dimensi","Contengan","Peta","Graf"], c:0},
+  {q:"Selepas projek siap, apakah langkah seterusnya?", a:["Membuang projek","Menguji dan menambah baik","Menyorok projek","Tiada apa-apa"], c:1}
+]);

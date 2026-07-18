@@ -80,3 +80,25 @@ daftar("Darjah 4", "PJK", [
   {q:"Permainan hoki menggunakan alat apa?", a:["Raket","Kayu hoki","Bet","Tali"], c:1},
   {q:"Gaya manakah gaya renang?", a:["Gaya bebas","Gaya lompat","Gaya lari","Gaya baring"], c:0}
 ]);
+
+daftar("Darjah 4", "Sejarah", [
+  {q:"Apakah maksud 'sejarah'?", a:["Peristiwa masa lampau","Cerita dongeng","Ramalan masa depan","Lakonan"], c:0},
+  {q:"Siapakah pengasas Kesultanan Melayu Melaka?", a:["Hang Tuah","Parameswara","Tun Perak","Sultan Mansur Syah"], c:1},
+  {q:"Nama 'Melaka' diambil sempena nama apa?", a:["Sebatang sungai","Sebuah gunung","Sebatang pokok","Seekor haiwan"], c:2},
+  {q:"Siapakah laksamana Melaka yang terkenal?", a:["Hang Tuah","Parameswara","Tun Teja","Sultan Muzaffar"], c:0},
+  {q:"Yang manakah sumber sejarah?", a:["Artifak","Kartun","Mimpi","Ramalan"], c:0},
+  {q:"Siapakah bendahara Melaka yang terkenal?", a:["Hang Jebat","Tun Perak","Parameswara","Hang Lekir"], c:1},
+  {q:"Agama Islam dibawa ke Melaka oleh siapa?", a:["Pedagang","Askar","Nelayan sahaja","Petani sahaja"], c:0},
+  {q:"Melaka terkenal sebagai pusat apa pada zaman kesultanan?", a:["Perdagangan","Perindustrian moden","Pelancongan udara","Sukan"], c:0}
+]);
+
+daftar("Darjah 4", "Reka Bentuk Teknologi", [
+  {q:"Apakah alat untuk memotong kertas?", a:["Tukul","Gunting","Pemutar skru","Playar"], c:1},
+  {q:"Apakah yang perlu dibuat sebelum membina projek?", a:["Terus membina","Membuat lakaran","Tidur","Membuang bahan"], c:1},
+  {q:"Apakah alat untuk memasang skru?", a:["Pemutar skru","Gunting","Pembaris","Berus"], c:0},
+  {q:"Apakah peraturan keselamatan di dalam bengkel?", a:["Bergurau dengan rakan","Berlari-lari","Tidak bergurau semasa menggunakan alatan","Membaling alatan"], c:2},
+  {q:"Yang manakah bahan yang boleh dikitar semula?", a:["Kertas","Air kotor","Asap","Debu"], c:0},
+  {q:"Apakah alat untuk mengukur panjang?", a:["Tukul","Pembaris","Gunting","Playar"], c:1},
+  {q:"Apakah alat untuk memaku?", a:["Gunting","Pemutar skru","Tukul","Pembaris"], c:2},
+  {q:"Apakah langkah pertama dalam menghasilkan projek?", a:["Merancang","Membuang","Menjual","Menyimpan"], c:0}
+]);

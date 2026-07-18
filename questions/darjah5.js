@@ -80,3 +80,25 @@ daftar("Darjah 5", "PJK", [
   {q:"Merokok merosakkan organ apa?", a:["Paru-paru","Rambut","Kuku","Gigi sahaja"], c:0},
   {q:"Jika luka berdarah, apakah tindakan pertama?", a:["Biarkan sahaja","Tekan luka untuk hentikan pendarahan","Basuh dengan air gas","Tiup luka"], c:1}
 ]);
+
+daftar("Darjah 5", "Sejarah", [
+  {q:"Kuasa manakah yang menakluk Melaka pada tahun 1511?", a:["British","Portugis","Belanda","Jepun"], c:1},
+  {q:"Selepas Portugis, kuasa manakah menguasai Melaka?", a:["Belanda","Jepun","Siam","Sepanyol"], c:0},
+  {q:"Siapakah yang membuka Pulau Pinang pada tahun 1786?", a:["Stamford Raffles","Francis Light","Frank Swettenham","James Brooke"], c:1},
+  {q:"Siapakah yang membuka petempatan British di Singapura?", a:["Francis Light","Stamford Raffles","James Brooke","Hugh Low"], c:1},
+  {q:"Jepun menduduki Tanah Melayu pada tahun berapa?", a:["1931","1941","1951","1961"], c:1},
+  {q:"Apakah rancangan British yang dibantah orang Melayu pada 1946?", a:["Malayan Union","Rukun Negara","Wawasan 2020","Perjanjian Pangkor"], c:0},
+  {q:"Perjanjian Pangkor ditandatangani pada tahun berapa?", a:["1786","1874","1941","1957"], c:1},
+  {q:"Benteng yang dibina oleh Portugis di Melaka dipanggil apa?", a:["Kota A Famosa","Kota Bharu","Istana Melaka","Menara Condong"], c:0}
+]);
+
+daftar("Darjah 5", "Reka Bentuk Teknologi", [
+  {q:"Komponen elektronik manakah yang memancarkan cahaya?", a:["LED","Wayar","Suis","Bateri"], c:0},
+  {q:"Apakah sumber tenaga dalam litar elektronik ringkas?", a:["Bateri","Mentol","Wayar","Suis"], c:0},
+  {q:"Apakah alatan asas untuk menjahit?", a:["Tukul dan paku","Jarum dan benang","Gunting dan gam","Playar dan skru"], c:1},
+  {q:"Apakah alat untuk memotong kayu?", a:["Gergaji","Gunting","Jarum","Berus"], c:0},
+  {q:"Reka bentuk yang baik mestilah?", a:["Mahal sahaja","Berfungsi dan menarik","Besar sahaja","Berat"], c:1},
+  {q:"Mengapa perlu berhati-hati menggunakan gam panas?", a:["Ia berbau wangi","Ia boleh melecurkan kulit","Ia berwarna","Ia ringan"], c:1},
+  {q:"Apakah fungsi suis dalam litar?", a:["Memancarkan cahaya","Menyambung dan memutuskan arus","Menyimpan tenaga","Menghasilkan bunyi"], c:1},
+  {q:"Apakah yang diberikan kepada tanaman untuk membantu tumbesaran?", a:["Baja","Gula","Garam","Minyak"], c:0}
+]);
