@@ -22,7 +22,7 @@ daftar("Darjah 2", "Bahasa Melayu", [
   {q:"_____________helai kertas melayang apabila Kamariah menghempas fail ke atas mejanya.", a:["Seluruh","Ribuan","Setengah","Beberapa"], c:3},
   {q:"Haji Ahmad akhirnya meninggal dunia setelah_______________menderita penyakit angin ahmar.", a:["berhari-hari","berabad-abad","bertahun-tahun","berkurun-kurun"], c:2},
   {q:"________________jenis cenderamata dijual di ______________ gerai itu.", a:["Pelbagai…setiap","Berbagai…semua","Beberapa…segala","Pelbagai…segala"], c:0},
-  {q:"_______________ tubuhnya terasa lemah ____________ kali diserang demam panas.", a:["Tiga suku … sekalian","Setengah … beberapa","Seluruh…sekalian","Seluruh…setiap"], c:3},
+  {q:"_______________ t ubuhnya terasa lemah ____________ kali diserang demam panas.", a:["Tiga suku … sekalian","Setengah … beberapa","Seluruh…sekalian","Seluruh…setiap"], c:3},
   {q:"Tuan Zaidi mendermakan ____________ daripada hartanya kepada anak-anak yatim.", a:["sebahagian","sesetengah","beberapa","ribuan"], c:0},
   {q:"______________ murid diwajibkan menyertai aktiviti kokurikulum.", a:["Para","Setiap","Ribuan","Setengah"], c:1},
   {q:"Majikan itu melayani ________________pekerjanya dengan adil tanpa pilih kasih.", a:["separuh","beberapa","sebahagian","semua"], c:3},
